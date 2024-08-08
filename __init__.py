@@ -103,7 +103,24 @@ def chat():
     messages = get_messages()
     pov = "Rafael"
 
-    return render_template("chat.html", messages=enumerate(messages), pov=pov)
+    message_count_by_user = {}
+    for msg in messages:
+        try:
+            author = msg.author
+        except AttributeError:
+            continue
+
+        if msg.author.startswith("\u200e"):
+            author = msg.author.removeprefix("\u200e")
+
+        try:
+            message_count_by_user[author] += 1
+        except KeyError:
+            message_count_by_user[author] = 1
+
+    user_ranking = sorted(message_count_by_user.items(), key=lambda item: item[1], reverse=True)
+
+    return render_template("chat.html", messages=enumerate(messages), pov=pov, user_ranking=user_ranking)
 
 
 @app.route("/test")

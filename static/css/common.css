@@ -27,7 +27,7 @@ body {
 .chat {
     padding: 1em;
     background-color: #2C2C2C;
-    font-size: 130%;
+    width: 70%;
 
     .msg {
         display: flex;

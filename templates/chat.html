@@ -14,10 +14,18 @@
             <div class="msg{% if message.author == pov %} pov{% endif %}">
                 <div class="author">{{ message.author }}</div>
                 <div class="content">{{ message.content}}</div>
-                <div class="datetime">{{ message.sent.strftime('%H:%M') }}</div>
+                <div class="datetime">{{ message.sent.strftime('%d.%m.%Y · %H:%M') }}</div>
             </div>
             {% endif %}
             {% endfor %}
+        </div>
+        <div class="sidebar">
+            Anzahl Nachrichten nach Benutzer:
+            <ol>
+            {% for k, v in user_ranking %}
+            <li>{{ k }}: {{ v }}</li>
+            {% endfor %}
+            </ol>
         </div>
     </body>
 </html>
