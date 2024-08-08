@@ -3,7 +3,21 @@
     <head>
         {% include 'boilerplate.html' %}
     </head>
-    <body>
-        {{ messages }}
+    <body class="generic-dark">
+        <div class="chat">
+            {% for index, message in messages %}
+            {% if message.is_system() %}
+            <div class="msg sys">
+                {{ message.content }}
+            </div>
+            {% else %}
+            <div class="msg{% if message.author == pov %} pov{% endif %}">
+                <div class="author">{{ message.author }}</div>
+                <div class="content">{{ message.content}}</div>
+                <div class="datetime">{{ message.sent.strftime('%H:%M') }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
     </body>
 </html>
